@@ -12,8 +12,7 @@ class PostModelTest(unittest.TestCase):
 
     def test_check_instance_variables(self):
         self.assertEquals(self.this_post.title,'title')
-        self.assertEquals(self.this_post.text,'text')
-        self.assertEquals(self.this_post.category,'category')
+        self.assertEquals(self.this_post.content,'content')
         self.assertEquals(self.this_post.post_pic_path,'postpicpath')              
 
     def test_save_post(self):
