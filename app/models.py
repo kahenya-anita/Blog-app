@@ -1,7 +1,7 @@
 from werkzeug.security import generate_password_hash,check_password_hash
 from flask_login import UserMixin
 from datetime import datetime
-# from . import db
+from . import db
 # from . import login_manager
 
 
@@ -16,15 +16,15 @@ class Quote:
         self.quote = quote
 
 
-# class User(UserMixin, db.Model):
-#     __tablename__ = 'users'
-#     id = db.Column(db.Integer,primary_key = True)
-#     username = db.Column(db.String(255),index = True)
-#     email = db.Column(db.String(255),unique = True,index = True)    
-#     password_hash = db.Column(db.String(255))
-#     name = db.Column(db.String)
-#     prof_pic_path = db.Column(db.String)
-#     bio = db.Column(db.String)
+class User(UserMixin, db.Model):
+    __tablename__ = 'users'
+    id = db.Column(db.Integer,primary_key = True)
+    username = db.Column(db.String(255),index = True)
+    email = db.Column(db.String(255),unique = True,index = True)    
+    password_hash = db.Column(db.String(255))
+    name = db.Column(db.String)
+    prof_pic_path = db.Column(db.String)
+    bio = db.Column(db.String)
 
 #     @property
 #     def password(self):
@@ -38,27 +38,27 @@ class Quote:
 #     def verify_password(self,password):
 #         return check_password_hash(self.password_hash,password)
 
-#     def __repr__(self):
-#         return f'{self.username}'
+    def __repr__(self):
+        return f'{self.username}'
 
 
-# class Post(db.Model):
-#     __tablename__ = 'posts'
-#     id = db.Column(db.Integer,primary_key = True)
-#     title=db.Column(db.String)
-#     text=db.Column(db.String)
-#     posted = db.Column(db.DateTime,default=datetime.utcnow)    
-#     category = db.Column(db.String)
-#     post_pic_path = db.Column(db.String) 
-#     comments = db.relationship('Comment',backref = 'post',lazy = "dynamic")  
+class Post(db.Model):
+    __tablename__ = 'posts'
+    id = db.Column(db.Integer,primary_key = True)
+    title=db.Column(db.String)
+    text=db.Column(db.String)
+    posted = db.Column(db.DateTime,default=datetime.utcnow)    
+    category = db.Column(db.String)
+    post_pic_path = db.Column(db.String) 
+    comments = db.relationship('Comment',backref = 'post',lazy = "dynamic")  
 
-#     def save_post(self):
-#         db.session.add(self)
-#         db.session.commit()
+    def save_post(self):
+        db.session.add(self)
+        db.session.commit()
 
     
-#     def __repr__(self):
-#         return f'{self.id}'
+    def __repr__(self):
+        return f'{self.id}'
 
 
 # class Comment(db.Model):

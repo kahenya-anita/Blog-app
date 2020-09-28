@@ -3,9 +3,9 @@ from flask_login import login_required
 from . import main
 from ..request import get_quote
 from .forms import PostForm,CommentForm,SubscribeForm,UnsubscribeForm,ContactForm,UpdateProfile
-from ..models import Post,Comment,Subscriber,Contact,Admin
-from .. import db,photos
-from ..email import mail_message
+# from ..models import Post,Comment,Subscriber,Contact,User
+# from .. import db,photos
+# from ..email import mail_message
 
 
 @main.route('/')

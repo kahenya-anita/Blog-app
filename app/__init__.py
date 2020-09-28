@@ -24,22 +24,22 @@ def create_app(config_name):
     app.register_blueprint(main_blueprint)
 
 
-    from .auth import auth as auth_blueprint
-    app.register_blueprint(auth_blueprint,url_prefix = '/authenticate')
+    # from .auth import auth as auth_blueprint
+    # app.register_blueprint(auth_blueprint,url_prefix = '/authenticate')
 
 
-    from .requests import configure_request
+    from .request import configure_request
     configure_request(app)
 
-    from .email import configure_email
-    configure_email(app)
+    # from .email import configure_email
+    # configure_email(app)
 
     # configure UploadSet
-    configure_uploads(app,photos)
+    # configure_uploads(app,photos)
 
 
     # setting config
-    from .requests import configure_request
+    from .request import configure_request
     configure_request(app)
 
     return app
