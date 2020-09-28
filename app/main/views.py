@@ -12,7 +12,7 @@ from ..email import mail_message
 def index():
     quote=get_quote()
     blog_posts=Post.query.order_by(Post.posted.desc())
-    author = Admin.query.first()    
+    author = User.query.first()    
 
     return render_template('index.html', quote=quote, posts=blog_posts,author=author)
 

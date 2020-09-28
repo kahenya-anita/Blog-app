@@ -62,49 +62,48 @@ class Post(db.Model):
     def __repr__(self):
         return f'{self.id}'
 
+class Comment(db.Model):
+    __tablename__ = 'comments'
+    id = db.Column(db.Integer,primary_key = True)
+    comment_text=db.Column(db.String)
+    posted = db.Column(db.DateTime,default=datetime.utcnow)    
+    post_id = db.Column(db.Integer,db.ForeignKey("posts.id"))
 
-# class Comment(db.Model):
-#     __tablename__ = 'comments'
-#     id = db.Column(db.Integer,primary_key = True)
-#     comment_text=db.Column(db.String)
-#     posted = db.Column(db.DateTime,default=datetime.utcnow)    
-#     post_id = db.Column(db.Integer,db.ForeignKey("posts.id"))
-
-#     def save_comment(self):
-#         db.session.add(self)
-#         db.session.commit()
-
-    
-#     def __repr__(self):
-#         return f'{self.comment}'
-
-
-# class Subscriber(db.Model):
-#     __tablename__ = 'subscribers'
-#     id = db.Column(db.Integer,primary_key = True)
-#     email = db.Column(db.String(255),unique = True,index = True) 
-
-#     def save_subscriber(self):
-#         db.session.add(self)
-#         db.session.commit()
+    def save_comment(self):
+        db.session.add(self)
+        db.session.commit()
 
     
-#     def __repr__(self):
-#         return f'{self.email}'
+    def __repr__(self):
+        return f'{self.comment}'
 
 
-# class Contact(db.Model):
-#     __tablename__ = 'contacts'
-#     id = db.Column(db.Integer,primary_key = True)
-#     name = db.Column(db.String(255),index = True)
-#     email = db.Column(db.String(255),index = True) 
-#     title = db.Column(db.String)
-#     message = db.Column(db.String)
+class Subscriber(db.Model):
+    __tablename__ = 'subscribers'
+    id = db.Column(db.Integer,primary_key = True)
+    email = db.Column(db.String(255),unique = True,index = True) 
 
-#     def save_contact(self):
-#         db.session.add(self)
-#         db.session.commit()
+    def save_subscriber(self):
+        db.session.add(self)
+        db.session.commit()
 
     
-    # def __repr__(self):
-    #     return f'{self.title}'
+    def __repr__(self):
+        return f'{self.email}'
+
+
+class Contact(db.Model):
+    __tablename__ = 'contacts'
+    id = db.Column(db.Integer,primary_key = True)
+    name = db.Column(db.String(255),index = True)
+    email = db.Column(db.String(255),index = True) 
+    title = db.Column(db.String)
+    message = db.Column(db.String)
+
+    def save_contact(self):
+        db.session.add(self)
+        db.session.commit()
+
+    
+    def __repr__(self):
+        return f'{self.title}'

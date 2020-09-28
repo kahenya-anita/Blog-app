@@ -27,8 +27,6 @@ def create_app(config_name):
     bootstrap.init_app(app)
     db.init_app(app)
     login_manager.init_app(app)
-    from .request import configure_request
-    configure_request(app)
     mail.init_app(app)
 
     # Registering the blueprint
@@ -41,8 +39,8 @@ def create_app(config_name):
 
 
 
-    # from .email import configure_email
-    # configure_email(app)
+    from .email import configure_email
+    configure_email(app)
 
     #configure UploadSet
     configure_uploads(app,photos)

@@ -19,12 +19,11 @@
                     <div class="card card-post">
                         <div class="card-body">
                             <img class="card-img-top" src="{{url_for('static',filename=post.post_pic_path)}}" alt="Profile picture">
-                            <h4 class="card-title">{{post.title | upper}}</h4>
-                            <h5 class="card-subtitle mb-2 text-muted">{{post.category | upper}}</h5>                    
+                            <h4 class="card-title">{{post.title | upper}}</h4>                   
                             <h5 class="card-subtitle mb-2 text-muted">{{post.posted.strftime("%d %b %Y %I:%M %p")}}</h5>
                             <p class="card-text">{{post.text}}</p>  
                             {% if current_user.is_authenticated %} 
-                                <button class="btn btn-primary"><a href="{{(url_for('main.update_blog', post_id=post.id))}}">Edit</a></button> 
+                                <button class="btn btn-primary"><a href="{{(url_for('main.update_blog', post_id=post.id))}}">Update</a></button> 
                                 <button class="btn btn-danger"><a href="{{(url_for('main.delete_blog', post_id=post.id))}}">Delete</a></button>   
                             {% endif %}
                             <div class="row under-nav"></div>                                  
@@ -42,7 +41,7 @@
                             <h3><b>Comments</b></h3>                            
                             <div class="row">
                                 {% if current_user.is_authenticated %} 
-                                    {{macro.displayCommentsAdmin(comments)}}
+                                    {{macro.displayCommentsUser(comments)}}
                                 {% else %}
                                     {{macro.displayComments(comments)}}
                                 {% endif %}
