@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+
+{% import 'macros.html' as macro%}
+
+{% block content %}
+
+<div class="container-fluid">
+    <div class="row jumbo">
+        <div class="col-xs-12">
+            <div class="row">
+                <div class="col-xs-0 col-md-1"></div>
+                <!-- Carousel -->                
+                <div class="col-xs-12 col-md-6 carousel-border">
+                    {% if posts[0] %}
+                    <div id="myCarousel" class="carousel slide" data-ride="carousel">                            
+                        <div class="carousel-inner">
+                          <div class="item active">
+                            <img src="{{url_for('static',filename=posts[0].post_pic_path)}}" alt="...">
+                            <div class="carousel-caption">
+                                <h4 class="cyan"><a href="/post/{{posts[0].id}}">{{posts[0].title}} | {{posts[0].category | capitalize}}</a></h4>                                                                                                     
+                            </div>
+                          </div>
+
+                          {{macro.displayCarousel(posts)}}
+                                                   
+                        </div>
+                      
+                        <!-- Controls -->
+                        <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">                          
+                        </a>
+                        <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">                          
+                        </a>
+                    </div> 
+                    {% endif %}
+                    <!-- /Carousel -->
+                </div>
+                <div class="col-xs-0 col-md-1"></div>
+                <div class="col-xs-12 col-md-2">
+                    <div class="card author-card">
+                        {% if author.prof_pic_path %}
+                        <img class="card-img-top img-thumbnail" src="{{url_for('static',filename=author.prof_pic_path)}}" alt="Profile picture">
+                        {%else%}
+                        <img class="card-img-top" src="https://pecb.com/conferences/wp-content/uploads/2017/10/no-profile-picture.jpg" alt="Profile picture">
+                        {% endif %}                        
+                        <div class="card-body">
+                            <h5 class="text-muted">Author</h5>
+                            {% if author.name %}
+                            <h5 class="card-title orange"> {{author.name| upper}} </h5>
+                            {%else%}
+                            <h5 class="card-title"> No name for author </h5>
+                            {% endif %}
+                            {% if author.bio %}
+                            <p class="card-text"> {{author.bio}}</p>
+                            {%else%}
+                            <p class="card-text"> No bio </p>
+                            {% endif %}
+                            {% if current_user.is_authenticated %}
+                            <p class="card-text text-primary"><a href="/update_profile">Edit profile</a></p>
+                            {% endif %}                                                            
+                        </div>
+                      </div>
+                </div>
+                <div class="col-xs-0 col-md-2"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-md-8">
+            <div class="row">
+                <div class="col-xs-12">
+                    <h1>Posts</h1>
+                    <hr>
+                </div>
+            </div>
+            <div class="row display-flex">
+                {{ macro.displayBlogs(posts) }}
+            </div>
+        </div>
+        <div class="col-xs-0 col-md-1"></div>
+        <div class="col-xs-12 col-md-3">
+            <div class="jumbotron jumbotron-quote">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <h2><u>Quote</u></h2>
+                        <p>"{{quote.quote}}"</p>
+                        <p class="text-muted">- {{quote.author}}</p>                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
