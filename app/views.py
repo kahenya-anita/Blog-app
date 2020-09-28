@@ -1,5 +1,6 @@
 from flask import render_template
 from app import app
+from .requests import get_quote
 
 # Views
 @app.route('/')
@@ -41,5 +42,7 @@ def admin():
     title = 'New Post'
 
     return render_template('user.html', title=title, post_form=form, quote=quote)
+
+
 
 
