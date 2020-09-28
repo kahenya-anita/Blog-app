@@ -2,10 +2,10 @@ from flask import render_template,request,redirect,url_for,abort
 from flask_login import login_required
 from . import main
 from ..request import get_quote
-from .forms import PostForm,CommentForm,SubscribeForm,UnsubscribeForm,ContactForm,UpdateProfile
-# from ..models import Post,Comment,Subscriber,Contact,User
-# from .. import db,photos
-# from ..email import mail_message
+from .forms import PostForm,CommentForm,SubscribeForm,UnsubscribeForm,ContactForm,UpdateProfile,ReviewForm
+from ..models import Review,Post,Comment,Subscriber,Contact,User
+from .. import db,photos
+from ..email import mail_message
 
 
 @main.route('/')
@@ -19,13 +19,13 @@ def index():
 
 @main.route('/user',methods = ['GET','POST'])
 @login_required
-def admin(): 
+def user(): 
     form=PostForm()
     quote=get_quote()        
     if form.validate_on_submit():
         title = form.title.data
         text = form.text.data
-        category = form.category.data
+        
         
         # Updated post instance
         this_post = Post(title=title, text=text, category=category, post_pic_path='photos/sample-image.jpeg')
@@ -202,10 +202,11 @@ def contact():
 
 
 @main.route('/profile')
-def profile():
+def profile(uname):
     quote=get_quote() 
     blog_posts=Post.query.order_by(Post.posted.desc())
-    author = Admin.query.first()
+    author = User.query.first()
+
     if author is None:
         abort(404)
 
@@ -217,7 +218,8 @@ def profile():
 @login_required
 def update_profile(): 
     quote=get_quote()
-    author = Admin.query.first()
+    author = User.query.first()
+
     if author is None:
         abort(404)
     form = UpdateProfile()

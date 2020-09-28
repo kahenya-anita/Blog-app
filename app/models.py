@@ -26,7 +26,7 @@ class User(UserMixin, db.Model):
     name = db.Column(db.String)
     prof_pic_path = db.Column(db.String)
     bio = db.Column(db.String)
-    password_hash = db.Column(db.String(255))
+    password_secure = db.Column(db.String(255))
 
    @property
     def password(self):
