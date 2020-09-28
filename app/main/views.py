@@ -17,7 +17,7 @@ def index():
     return render_template('index.html', quote=quote, posts=blog_posts,author=author)
 
 
-@main.route('/admin',methods = ['GET','POST'])
+@main.route('/user',methods = ['GET','POST'])
 @login_required
 def admin(): 
     form=PostForm()
@@ -44,7 +44,7 @@ def admin():
       
     title = 'New Post'
 
-    return render_template('admin.html', title=title, post_form=form, quote=quote)
+    return render_template('user.html', title=title, post_form=form, quote=quote)
 
 
 @main.route('/post/<post_id>',methods = ['GET','POST'])
