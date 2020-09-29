@@ -6,7 +6,6 @@
                 <img class="card-img-top" src="{{url_for('static',filename=post.post_pic_path)}}" alt="Post picture">
                 <div class="card-body">
                     <h5 class="card-title">{{post.title | upper}}</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">{{post.category | upper}}</h6>
                     <h6 class="card-subtitle mb-2 text-muted">{{post.posted.strftime("%d %b %Y %I:%M %p")}}</h6>
                     <p class="card-text">{{post.text | truncate(400)}}</p>
                                        

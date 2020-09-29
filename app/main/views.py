@@ -2,8 +2,8 @@ from flask import render_template,request,redirect,url_for,abort
 from flask_login import login_required
 from . import main
 from ..request import get_quote
-from .forms import PostForm,CommentForm,SubscribeForm,UnsubscribeForm,ContactForm,UpdateProfile,ReviewForm
-from ..models import Review,Post,Comment,Subscriber,Contact,User
+from .forms import PostForm,CommentForm,SubscribeForm,UnsubscribeForm,ContactForm,UpdateProfile
+from ..models import Post,Comment,Subscriber,Contact,User
 from .. import db,photos
 from ..email import mail_message
 
@@ -18,7 +18,6 @@ def index():
 
 
 @main.route('/user',methods = ['GET','POST'])
-@login_required
 def user(): 
     form=PostForm()
     quote=get_quote()        

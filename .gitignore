@@ -1,5 +1,4 @@
 virtual/
 *.pyc
-start.sh
 instance/
-app/static/photos
+start.sh
